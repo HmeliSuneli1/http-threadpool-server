@@ -1,0 +1,22 @@
+# test an profile files
+*.log
+*.profraw
+*.profdata
+
+# build files
+
+build/
+build-*/
+cmake-build-*/
+bin/
+*.o
+*.a
+*.so
+
+# IDE, text editors, system trash and etc.
+
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
