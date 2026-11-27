@@ -2,6 +2,7 @@
 *.log
 *.profraw
 *.profdata
+.cache/
 
 # build files
 
