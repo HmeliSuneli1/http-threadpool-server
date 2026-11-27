@@ -32,9 +32,20 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # Main server library
+
 add_library(server_core STATIC
-    # ...
+    src/http/response.cpp
+    src/http/parser.cpp
+    src/routing/router.cpp
 )
+target_include_directories(server_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_link_libraries(server_core PUBLIC Threads::Threads nlohmann_json::nlohmann_json)
+
+enable_testing()
+add_executable(unit_tests tests/test_main.cpp)
+target_link_libraries(unit_tests PRIVATE server_core GTest::gtest_main)
+include(GoogleTest)
+gtest_discover_tests(unit_tests)
 target_include_directories(server_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_link_libraries(server_core PUBLIC Threads::Threads nlohmann_json::nlohmann_json)
 set_target_properties(server_core PROPERTIES LINKER_LANGUAGE CXX)
